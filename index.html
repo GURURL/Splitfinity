@@ -14,9 +14,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <!-- jsPDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <style>
         :root {
             --primary: #4361EE;
@@ -47,107 +44,6 @@
             overflow-x: hidden;
         }
         
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Lato', sans-serif;
-            font-weight: 700;
-        }
-        
-        .card {
-            border: none;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-        
-        .gradient-text {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-        }
-        
-        .accent-bg {
-            background: linear-gradient(135deg, var(--accent), var(--danger));
-        }
-        
-        /* Updated Button Styles */
-        .btn {
-            font-family: 'Lato', sans-serif;
-            font-weight: 600;
-            border-radius: 12px;
-            padding: 12px 24px;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
-            color: white;
-        }
-        
-        .btn-outline-primary {
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            background: transparent;
-        }
-        
-        .btn-outline-primary:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .btn-lg {
-            padding: 14px 28px;
-            font-size: 16px;
-        }
-        
-        .btn-sm {
-            padding: 10px 20px;
-            font-size: 13px;
-        }
-        
-        .btn-icon {
-            width: 44px;
-            height: 44px;
-            padding: 0;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
         .screen {
             display: none;
             min-height: 100vh;
@@ -165,93 +61,15 @@
             background: linear-gradient(135deg, #F9FAFB 0%, #EFF2FF 100%);
         }
         
-        .trip-selection-screen {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(135deg, #F9FAFB 0%, #EFF2FF 100%);
-        }
-        
-        .trip-option {
-            cursor: pointer;
-            transition: all 0.4s ease;
-            border-radius: 20px;
+        .auth-card {
+            max-width: 400px;
+            width: 100%;
             padding: 40px 30px;
-            margin-bottom: 30px;
             background: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .trip-option:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .trip-icon {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 40px;
-            color: white;
-        }
-        
-        .floating-action-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            z-index: 100;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s ease;
-            color: white;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            cursor: pointer;
-        }
-        
-        .floating-action-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 20px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-        
-        .dashboard-header > div {
-            display: flex;
-            align-items: center;
-        }
-        
-        .badge {
-            font-size: 0.75rem;
-            padding: 8px 12px;
             border-radius: 20px;
-            font-weight: 600;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
         
-        /* Google Sign-In Button */
         .google-btn {
             background: white;
             color: #757575;
@@ -266,6 +84,7 @@
             gap: 12px;
             width: 100%;
             margin: 15px 0;
+            cursor: pointer;
         }
         
         .google-btn:hover {
@@ -273,11 +92,6 @@
             border-color: #D0D0D0;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .google-btn img {
-            width: 20px;
-            height: 20px;
         }
         
         .divider {
@@ -299,562 +113,6 @@
             font-size: 14px;
             color: var(--gray);
         }
-
-        /* Updated Stats Cards */
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .stat-card {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
-        
-        .stat-card.accent::before {
-            background: linear-gradient(90deg, var(--accent), var(--danger));
-        }
-        
-        .stat-card .stat-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
-        }
-        
-        .stat-card .stat-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: white;
-            flex-shrink: 0;
-        }
-        
-        .stat-card .stat-icon.primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-        }
-        
-        .stat-card .stat-icon.accent {
-            background: linear-gradient(135deg, var(--accent), var(--danger));
-        }
-        
-        .stat-card .stat-content {
-            flex-grow: 1;
-        }
-        
-        .stat-card .stat-value {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            line-height: 1;
-            color: var(--dark);
-        }
-        
-        .stat-card .stat-label {
-            font-size: 14px;
-            color: var(--gray);
-            font-weight: 500;
-            margin-bottom: 12px;
-        }
-        
-        .stat-card .stat-trend {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            font-weight: 600;
-        }
-        
-        .stat-card .trend-up {
-            color: var(--success);
-        }
-        
-        .stat-card .trend-down {
-            color: var(--danger);
-        }
-        
-        .stat-card .trend-icon {
-            margin-right: 6px;
-            font-size: 12px;
-        }
-        
-        .expense-item {
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            background: white;
-            border-left: 4px solid var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .expense-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-        }
-        
-        .balance-item {
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            background: white;
-            border-left: 4px solid var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .balance-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-        }
-        
-        .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: white;
-            flex-shrink: 0;
-        }
-        
-        .avatar-small {
-            width: 30px;
-            height: 30px;
-            color: white;
-            font-weight: 700;
-            text-align: center;
-            font-size: 20px;
-            align-items: center;
-        }
-        
-        .participant-chip {
-            display: inline-flex;
-            align-items: center;
-            background: var(--primary-light);
-            border-radius: 20px;
-            padding: 8px 15px;
-            margin: 5px;
-            font-size: 14px;
-            color: var(--primary);
-            font-weight: 500;
-        }
-        
-        .participant-chip .remove-btn {
-            background: none;
-            border: none;
-            color: var(--danger);
-            margin-left: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .split-option {
-            display: none;
-        }
-        
-        .split-option.active {
-            display: block;
-        }
-        
-        .form-control {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: var(--dark);
-            padding: 12px 20px;
-            transition: all 0.3s ease;
-            font-family: 'Roboto', sans-serif;
-        }
-        
-        .form-control:focus {
-            background: white;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.15);
-            color: var(--dark);
-        }
-        
-        .form-label {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--dark);
-            font-family: 'Lato', sans-serif;
-        }
-        
-        .nav-tabs {
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .nav-tabs .nav-link {
-            background: transparent;
-            border: none;
-            color: var(--gray);
-            font-weight: 600;
-            padding: 12px 20px;
-            border-radius: 12px 12px 0 0;
-            transition: all 0.3s ease;
-            font-family: 'Lato', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .nav-tabs .nav-link.active {
-            color: var(--primary);
-            background: var(--primary-light);
-            border-bottom: 2px solid var(--primary);
-        }
-        
-        .balance-positive {
-            color: var(--success);
-            font-weight: 600;
-        }
-        
-        .balance-negative {
-            color: var(--danger);
-            font-weight: 600;
-        }
-        
-        .category-tag {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 600;
-            background: var(--primary-light);
-            color: var(--primary);
-        }
-        
-        .modal-content {
-            border-radius: 16px;
-            border: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .modal-header {
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .modal-footer {
-            border-top: 1px solid var(--border);
-        }
-        
-        .back-btn {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            cursor: pointer;
-        }
-        
-        .back-btn:hover {
-            background: var(--primary-light);
-            transform: translateX(-5px);
-        }
-        
-        .toast {
-            border-radius: 12px;
-            border: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            font-family: 'Roboto', sans-serif;
-        }
-        
-        .toast-success {
-            background: linear-gradient(135deg, var(--success), #00C897);
-            color: white;
-        }
-        
-        .toast-error {
-            background: linear-gradient(135deg, var(--danger), #FF2E63);
-            color: white;
-        }
-        
-        .export-btn {
-            background: linear-gradient(135deg, var(--success), #00C897);
-            border: none;
-            border-radius: 12px;
-            padding: 12px 24px;
-            font-weight: 600;
-            color: white;
-            transition: all 0.3s ease;
-            font-family: 'Lato', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .export-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 230, 161, 0.4);
-            color: white;
-        }
-        
-        @media (max-width: 768px) {
-            .screen {
-                padding: 15px;
-            }
-            
-            .floating-action-btn {
-                bottom: 20px;
-                right: 20px;
-                width: 60px;
-                height: 60px;
-                font-size: 20px;
-            }
-            
-            .trip-option {
-                padding: 30px 20px;
-            }
-            
-            .trip-icon {
-                width: 80px;
-                height: 80px;
-                font-size: 30px;
-            }
-            
-            .dashboard-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .dashboard-header > div {
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-            }
-            
-            .stats-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .stat-card {
-                padding: 20px;
-            }
-            
-            .stat-card .stat-value {
-                font-size: 28px;
-            }
-            
-            .btn {
-                padding: 10px 20px;
-                font-size: 13px;
-            }
-            
-            .btn-lg {
-                padding: 12px 24px;
-                font-size: 15px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .stat-card .stat-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .stat-card .stat-icon {
-                margin-bottom: 15px;
-            }
-            
-            .dashboard-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            
-            .dashboard-header > div {
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-            }
-        }
-        
-        /* Floating Background Elements */
-        .floating-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.05;
-            filter: blur(40px);
-        }
-        
-        .shape-1 {
-            width: 300px;
-            height: 300px;
-            background: var(--primary);
-            top: 10%;
-            left: 10%;
-        }
-        
-        .shape-2 {
-            width: 400px;
-            height: 400px;
-            background: var(--secondary);
-            bottom: 10%;
-            right: 10%;
-        }
-        
-        .shape-3 {
-            width: 200px;
-            height: 200px;
-            background: var(--accent);
-            top: 50%;
-            left: 80%;
-        }
-        
-        .pulse-animation {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--gray);
-        }
-        
-        .empty-state i {
-            font-size: 48px;
-            margin-bottom: 15px;
-            opacity: 0.5;
-        }
-        
-        .expense-details {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .expense-info {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .expense-meta {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 5px;
-        }
-        
-        .balance-details {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .input-group {
-            display: flex;
-            align-items: center;
-        }
-        
-        .input-group-text {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .settlement-details {
-            background: var(--primary-light);
-            border-radius: 12px;
-            padding: 15px;
-            margin: 15px 0;
-        }
-        
-        .settlement-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        
-        .settlement-item:last-child {
-            border-bottom: none;
-        }
-        
-        .settlement-avatar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .settlement-amount {
-            font-weight: 600;
-            color: var(--primary);
-        }
-        
-        .smart-suggestion {
-            background: var(--success);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-left: 10px;
-        }
         
         .loading-spinner {
             display: inline-block;
@@ -870,191 +128,53 @@
             to { transform: rotate(360deg); }
         }
         
-        .participants-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+        .toast {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .setup-instructions {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        .setup-instructions h5 {
+            color: var(--primary);
             margin-bottom: 15px;
         }
         
-        /* Solo Trip Specific Styles */
-        .solo-stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+        .setup-instructions ol {
+            padding-left: 20px;
         }
         
-        .solo-stat-card {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        
-        .solo-stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .solo-stat-value {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--dark);
-        }
-        
-        .solo-stat-label {
-            font-size: 14px;
-            color: var(--gray);
-            font-weight: 500;
-        }
-        
-        .budget-progress {
-            margin-top: 10px;
-        }
-        
-        .budget-progress .progress {
-            height: 8px;
-            border-radius: 10px;
-        }
-        
-        .budget-progress .progress-bar {
-            border-radius: 10px;
-        }
-        
-        .category-breakdown {
-            margin-top: 30px;
-        }
-        
-        .category-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            border-radius: 12px;
+        .setup-instructions li {
             margin-bottom: 10px;
-            background: white;
-            transition: all 0.3s ease;
         }
         
-        .category-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-        
-        .category-color {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        
-        .category-name {
-            display: flex;
-            align-items: center;
-            flex-grow: 1;
-        }
-        
-        .category-amount {
-            font-weight: 600;
-        }
-        
-        .category-percentage {
-            color: var(--gray);
-            font-size: 14px;
-        }
-        
-        /* Auth Form Styles */
-        .auth-card {
-            max-width: 400px;
-            width: 100%;
-            padding: 40px 30px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-        
-        .auth-tabs .nav-link {
-            border: none;
-            padding: 12px 20px;
-            font-weight: 600;
-        }
-        
-        .auth-tabs .nav-link.active {
-            background: transparent;
-            border-bottom: 3px solid var(--primary);
-            color: var(--primary);
-        }
-        
-        .user-menu {
-            position: relative;
-        }
-        
-        .user-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 10px 0;
-            min-width: 180px;
-            z-index: 1000;
-            display: none;
-        }
-        
-        .user-dropdown.show {
-            display: block;
-        }
-        
-        .user-dropdown-item {
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--dark);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .user-dropdown-item:hover {
-            background: var(--primary-light);
-            color: var(--primary);
-        }
-        
-        .budget-setup-card {
-            max-width: 500px;
-            margin: 0 auto;
+        .setup-instructions code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
-    <!-- Floating Background Shapes -->
-    <div class="floating-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-    </div>
-
-    <!-- Toast Container for Notifications -->
-    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1050;">
-        <!-- Toasts will be inserted here dynamically -->
-    </div>
-
     <!-- Auth Screen -->
     <div class="screen active-screen" id="authScreen">
         <div class="container auth-screen">
             <div class="auth-card">
                 <div class="text-center mb-4">
-                    <h1 class="display-5 fw-bold gradient-text mb-2">ExpenShare</h1>
+                    <h1 class="display-5 fw-bold mb-2" style="background: linear-gradient(90deg, #4361EE, #00B4D8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">ExpenShare</h1>
                     <p class="text-muted">Track and split expenses the smart way</p>
                 </div>
                 
                 <!-- Google Sign-In Button -->
-                <button class="google-btn" onclick="signInWithGoogle()">
+                <button class="google-btn" onclick="signInWithGoogle()" id="googleSignInBtn">
                     <svg width="20" height="20" viewBox="0 0 24 24">
                         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                         <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -1068,515 +188,336 @@
                     <span>or</span>
                 </div>
                 
-                <ul class="nav nav-tabs auth-tabs mb-4" id="authTabs" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab">
-                            Sign In
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup" type="button" role="tab">
-                            Sign Up
-                        </button>
-                    </li>
-                </ul>
-                
-                <div class="tab-content">
-                    <!-- Login Tab -->
-                    <div class="tab-pane fade show active" id="login" role="tabpanel">
-                        <form id="loginForm">
-                            <div class="mb-3">
-                                <label for="loginEmail" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required>
-                            </div>
-                            <div class="mb-4">
-                                <label for="loginPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
-                            </div>
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-lg" id="loginBtn">
-                                    <i class="fas fa-sign-in-alt"></i>
-                                    <span>Sign In</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    
-                    <!-- Signup Tab -->
-                    <div class="tab-pane fade" id="signup" role="tabpanel">
-                        <form id="signupForm">
-                            <div class="mb-3">
-                                <label for="signupName" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="signupName" placeholder="Enter your full name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="signupEmail" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email" required>
-                            </div>
-                            <div class="mb-4">
-                                <label for="signupPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="signupPassword" placeholder="Create a password" required minlength="6">
-                            </div>
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-lg" id="signupBtn">
-                                    <i class="fas fa-user-plus"></i>
-                                    <span>Create Account</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                <!-- Demo Mode Button -->
+                <button class="btn btn-primary btn-lg w-100" onclick="enableDemoMode()">
+                    <i class="fas fa-play-circle"></i>
+                    Try Demo Mode
+                </button>
+
+                <!-- Firebase Setup Instructions -->
+                <div class="setup-instructions">
+                    <h5><i class="fas fa-cog"></i> Setup Instructions</h5>
+                    <p class="text-muted mb-3">To use Google Sign-In, you need to set up Firebase:</p>
+                    <ol>
+                        <li>Go to <a href="https://console.firebase.google.com" target="_blank">Firebase Console</a></li>
+                        <li>Create a new project or select existing one</li>
+                        <li>Enable Authentication → Google provider</li>
+                        <li>Get your config from Project Settings</li>
+                        <li>Replace the config in the code</li>
+                    </ol>
+                    <p class="mb-0">
+                        <small>For now, click <strong>"Try Demo Mode"</strong> to test the app</small>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Trip Selection Screen -->
-    <div class="screen" id="tripSelectionScreen">
-        <div class="container trip-selection-screen">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <div class="mb-5">
-                        <h1 class="display-4 fw-bold mb-3 gradient-text">Welcome!</h1>
-                        <p class="lead text-muted">Choose your trip type to get started</p>
-                    </div>
-                    
-                    <div class="row justify-content-center">
-                        <div class="col-md-5">
-                            <div class="trip-option card pulse-animation" onclick="selectTripType('group')">
-                                <div class="trip-icon gradient-bg">
-                                    <i class="fas fa-users"></i>
+    <!-- Demo App Screen -->
+    <div class="screen" id="demoAppScreen">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold" style="background: linear-gradient(90deg, #4361EE, #00B4D8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">ExpenShare Demo</h2>
+                <button class="btn btn-outline-primary" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Exit Demo
+                </button>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body text-center p-5">
+                            <div class="mb-4">
+                                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #4361EE, #00B4D8); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                                    <i class="fas fa-users text-white" style="font-size: 30px;"></i>
                                 </div>
-                                <h3 class="fw-bold mb-2">Group Trip</h3>
-                                <p class="text-muted">Split expenses with friends, family, or colleagues</p>
+                                <h4>Group Trip</h4>
+                                <p class="text-muted">Split expenses with friends and family</p>
                             </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="trip-option card" onclick="selectTripType('solo')">
-                                <div class="trip-icon accent-bg">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <h3 class="fw-bold mb-2">Solo Trip</h3>
-                                <p class="text-muted">Track your personal expenses and budget</p>
-                            </div>
+                            <button class="btn btn-primary" onclick="selectTripType('group')">
+                                <i class="fas fa-play"></i>
+                                Start Group Trip
+                            </button>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body text-center p-5">
+                            <div class="mb-4">
+                                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #FF6B9D, #FF4D7C); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                                    <i class="fas fa-user text-white" style="font-size: 30px;"></i>
+                                </div>
+                                <h4>Solo Trip</h4>
+                                <p class="text-muted">Track your personal expenses</p>
+                            </div>
+                            <button class="btn btn-primary" onclick="selectTripType('solo')">
+                                <i class="fas fa-play"></i>
+                                Start Solo Trip
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 text-center">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Demo Mode:</strong> All data is stored locally in your browser and will be cleared when you exit.
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- [Rest of the screens remain the same as previous implementation] -->
-    <!-- Solo Budget Setup, Group Dashboard, Solo Dashboard, Add Expense Screen, Modals, etc. -->
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1050;"></div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyC4R6p1d0eX7V7qK8q9Q7wM8tN5vB7J8kK",
-            authDomain: "expenshare-app.firebaseapp.com",
-            projectId: "expenshare-app",
-            storageBucket: "expenshare-app.appspot.com",
-            messagingSenderId: "123456789012",
-            appId: "1:123456789012:web:abcdef123456"
-        };
+        // Firebase Configuration
+        // TODO: Replace with your actual Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyBdbs-BcpCyEs3Rg7tX6KJPVCpW252AiN8",
+    authDomain: "splitfinity-58c93.firebaseapp.com",
+    projectId: "splitfinity-58c93",
+    storageBucket: "splitfinity-58c93.firebasestorage.app",
+    messagingSenderId: "221214434926",
+    appId: "1:221214434926:web:b54f3a3a35657f12ffe87f",
+    measurementId: "G-HWPDJNNRLP"
+  };
+        // Initialize Firebase only if config is provided
+        let auth, db;
+        if (firebaseConfig.apiKey && firebaseConfig.apiKey !== 'YOUR_API_KEY') {
+            firebase.initializeApp(firebaseConfig);
+            auth = firebase.auth();
+            db = firebase.firestore();
+        }
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-
-        // Global variables
+        // Global variables for demo mode
         let currentUser = null;
         let currentTripType = null;
-        let participants = ['You'];
+        let isDemoMode = false;
         let expenses = [];
-        let currentSettlementPerson = null;
         let userData = {
             budget: 5000,
             tripDuration: 7
         };
 
-        // Firebase Auth State Listener
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                currentUser = user;
-                document.getElementById('userName').textContent = user.displayName || 'User';
-                document.getElementById('soloUserName').textContent = user.displayName || 'User';
-                loadUserData();
-                showScreen('tripSelectionScreen');
-            } else {
-                currentUser = null;
-                showScreen('authScreen');
-            }
-        });
-
-        // Google Sign-In Function
-        function signInWithGoogle() {
-            const provider = new firebase.auth.GoogleAuthProvider();
+        // Demo Mode Functions
+        function enableDemoMode() {
+            isDemoMode = true;
+            currentUser = {
+                uid: 'demo-user',
+                displayName: 'Demo User',
+                email: 'demo@expenshare.com'
+            };
+            showToast('Demo mode activated! You can explore all features.', 'success');
+            showScreen('demoAppScreen');
             
-            // Add scopes if needed
-            provider.addScope('profile');
-            provider.addScope('email');
-            
-            const googleBtn = document.querySelector('.google-btn');
-            const originalText = googleBtn.innerHTML;
-            googleBtn.innerHTML = '<span class="loading-spinner"></span> Connecting...';
-            googleBtn.disabled = true;
-            
-            auth.signInWithPopup(provider)
-                .then((result) => {
-                    // This gives you a Google Access Token
-                    const credential = result.credential;
-                    const token = credential.accessToken;
-                    
-                    // The signed-in user info
-                    const user = result.user;
-                    
-                    // Check if this is a new user
-                    return db.collection('users').doc(user.uid).get();
-                })
-                .then((doc) => {
-                    if (!doc.exists) {
-                        // New user - create user document
-                        return db.collection('users').doc(currentUser.uid).set({
-                            name: currentUser.displayName,
-                            email: currentUser.email,
-                            photoURL: currentUser.photoURL,
-                            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                            budget: 5000,
-                            tripDuration: 7,
-                            provider: 'google'
-                        });
-                    }
-                })
-                .then(() => {
-                    showToast('Signed in successfully with Google!', 'success');
-                })
-                .catch((error) => {
-                    console.error('Google Sign-In Error:', error);
-                    
-                    // Handle Errors here
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    
-                    if (errorCode === 'auth/popup-closed-by-user') {
-                        showToast('Sign-in was cancelled', 'error');
-                    } else {
-                        showToast('Error signing in with Google: ' + errorMessage, 'error');
-                    }
-                })
-                .finally(() => {
-                    googleBtn.innerHTML = originalText;
-                    googleBtn.disabled = false;
-                });
+            // Load demo data if exists
+            loadDemoData();
         }
 
-        // Traditional Email/Password Sign Up
-        document.getElementById('signupForm').addEventListener('submit', (e) => {
-            e.preventDefault();
+        function loadDemoData() {
+            const savedData = localStorage.getItem('expenshare_demo_data');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                expenses = data.expenses || [];
+                userData = data.userData || userData;
+            }
+        }
+
+        function saveDemoData() {
+            if (isDemoMode) {
+                const data = {
+                    expenses: expenses,
+                    userData: userData
+                };
+                localStorage.setItem('expenshare_demo_data', JSON.stringify(data));
+            }
+        }
+
+        // Firebase Google Sign-In
+        async function signInWithGoogle() {
+            const googleBtn = document.getElementById('googleSignInBtn');
+            const originalText = googleBtn.innerHTML;
             
-            const name = document.getElementById('signupName').value;
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-            
-            const signupBtn = document.getElementById('signupBtn');
-            const originalText = signupBtn.innerHTML;
-            signupBtn.innerHTML = '<span class="loading-spinner"></span> Creating account...';
-            signupBtn.disabled = true;
-            
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // Update user profile
-                    return userCredential.user.updateProfile({
-                        displayName: name
-                    });
-                })
-                .then(() => {
-                    // Create user document in Firestore
-                    return db.collection('users').doc(auth.currentUser.uid).set({
-                        name: name,
-                        email: email,
+            try {
+                googleBtn.innerHTML = '<span class="loading-spinner"></span> Connecting...';
+                googleBtn.disabled = true;
+
+                if (!auth) {
+                    throw new Error('Firebase not configured. Please use Demo Mode or set up Firebase.');
+                }
+
+                const provider = new firebase.auth.GoogleAuthProvider();
+                provider.addScope('profile');
+                provider.addScope('email');
+                
+                const result = await auth.signInWithPopup(provider);
+                const user = result.user;
+                
+                // Check if user exists in Firestore
+                const userDoc = await db.collection('users').doc(user.uid).get();
+                
+                if (!userDoc.exists) {
+                    // Create new user document
+                    await db.collection('users').doc(user.uid).set({
+                        name: user.displayName,
+                        email: user.email,
+                        photoURL: user.photoURL,
                         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                         budget: 5000,
                         tripDuration: 7,
-                        provider: 'email'
+                        provider: 'google'
                     });
-                })
-                .then(() => {
-                    showToast('Account created successfully!', 'success');
-                    document.getElementById('signupForm').reset();
-                })
-                .catch((error) => {
-                    showToast(error.message, 'error');
-                    signupBtn.innerHTML = originalText;
-                    signupBtn.disabled = false;
-                });
-        });
-
-        // Traditional Email/Password Sign In
-        document.getElementById('loginForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            const loginBtn = document.getElementById('loginBtn');
-            const originalText = loginBtn.innerHTML;
-            loginBtn.innerHTML = '<span class="loading-spinner"></span> Signing in...';
-            loginBtn.disabled = true;
-            
-            auth.signInWithEmailAndPassword(email, password)
-                .then(() => {
-                    showToast('Signed in successfully!', 'success');
-                    document.getElementById('loginForm').reset();
-                })
-                .catch((error) => {
-                    showToast(error.message, 'error');
-                    loginBtn.innerHTML = originalText;
-                    loginBtn.disabled = false;
-                });
-        });
-
-        // Load user data from Firestore
-        function loadUserData() {
-            if (!currentUser) return;
-            
-            // Load user preferences
-            db.collection('users').doc(currentUser.uid).get()
-                .then((doc) => {
-                    if (doc.exists) {
-                        userData = { ...userData, ...doc.data() };
-                        
-                        // Update UI with user photo if available
-                        if (userData.photoURL) {
-                            updateUserPhoto(userData.photoURL);
-                        }
+                }
+                
+                showToast('Successfully signed in with Google!', 'success');
+                
+            } catch (error) {
+                console.error('Google Sign-In Error:', error);
+                
+                let errorMessage = 'Failed to sign in with Google. ';
+                
+                if (error.code === 'auth/popup-closed-by-user') {
+                    errorMessage = 'Sign-in was cancelled.';
+                } else if (error.code === 'auth/network-request-failed') {
+                    errorMessage = 'Network error. Please check your connection.';
+                } else if (error.code === 'auth/api-key-not-valid') {
+                    errorMessage = 'Firebase configuration error. Please use Demo Mode.';
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                showToast(errorMessage, 'error');
+                
+                // Offer demo mode as fallback
+                setTimeout(() => {
+                    if (confirm('Would you like to try Demo Mode instead?')) {
+                        enableDemoMode();
                     }
-                })
-                .catch((error) => {
-                    console.error('Error loading user data:', error);
-                });
-            
-            // Load expenses
-            loadExpenses();
+                }, 1000);
+            } finally {
+                googleBtn.innerHTML = originalText;
+                googleBtn.disabled = false;
+            }
         }
 
-        // Update user photo in UI
-        function updateUserPhoto(photoURL) {
-            const userMenus = document.querySelectorAll('.user-menu button');
-            userMenus.forEach(button => {
-                const existingImg = button.querySelector('img');
-                if (existingImg) {
-                    existingImg.src = photoURL;
-                } else {
-                    const img = document.createElement('img');
-                    img.src = photoURL;
-                    img.alt = 'User Photo';
-                    img.style.width = '24px';
-                    img.style.height = '24px';
-                    img.style.borderRadius = '50%';
-                    img.style.marginRight = '8px';
-                    button.insertBefore(img, button.firstChild);
+        // Firebase Auth State Listener (only if Firebase is configured)
+        if (auth) {
+            auth.onAuthStateChanged((user) => {
+                if (user && !isDemoMode) {
+                    currentUser = user;
+                    showToast('Welcome back!', 'success');
+                    showScreen('demoAppScreen'); // You can change this to your main app screen
                 }
             });
         }
 
-        // Load expenses from Firestore
-        function loadExpenses() {
-            if (!currentUser) return;
-            
-            db.collection('users').doc(currentUser.uid).collection('expenses')
-                .orderBy('timestamp', 'desc')
-                .onSnapshot((snapshot) => {
-                    expenses = [];
-                    snapshot.forEach((doc) => {
-                        expenses.push({ id: doc.id, ...doc.data() });
-                    });
-                    updateDashboard();
-                }, (error) => {
-                    console.error('Error loading expenses:', error);
-                });
-        }
-
-        // Save expense to Firestore
-        function saveExpense(expense) {
-            if (!currentUser) return;
-            
-            return db.collection('users').doc(currentUser.uid).collection('expenses').add(expense);
-        }
-
-        // Update user data in Firestore
-        function updateUserData() {
-            if (!currentUser) return;
-            
-            db.collection('users').doc(currentUser.uid).update(userData)
-                .then(() => {
-                    showToast('Budget updated successfully!', 'success');
-                })
-                .catch((error) => {
-                    showToast('Error updating budget: ' + error.message, 'error');
-                });
-        }
-
-        // Logout function
-        function logout() {
-            auth.signOut()
-                .then(() => {
-                    showToast('Signed out successfully!', 'success');
-                })
-                .catch((error) => {
-                    showToast('Error signing out: ' + error.message, 'error');
-                });
-        }
-
-        // Toggle user menu
-        function toggleUserMenu() {
-            const dropdown = currentTripType === 'group' ? 
-                document.getElementById('userDropdown') : 
-                document.getElementById('soloUserDropdown');
-            dropdown.classList.toggle('show');
-        }
-
-        // Close user menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.user-menu')) {
-                document.getElementById('userDropdown').classList.remove('show');
-                document.getElementById('soloUserDropdown').classList.remove('show');
-            }
-        });
-
-        // Function to show specific screen
+        // Navigation Functions
         function showScreen(screenId) {
-            // Hide all screens
-            const screens = document.querySelectorAll('.screen');
-            screens.forEach(screen => {
+            document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active-screen');
             });
-            
-            // Show the selected screen
             document.getElementById(screenId).classList.add('active-screen');
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
-            
-            // If showing dashboard, update it
-            if (screenId === 'groupDashboardScreen' || screenId === 'soloDashboardScreen') {
-                updateDashboard();
-            }
-            
-            // If showing add expense screen, update form
-            if (screenId === 'addExpenseScreen') {
-                updatePaidByOptions();
-                updateSplitOptions();
-            }
         }
-        
-        // Go back to appropriate dashboard
-        function goBackToDashboard() {
-            if (currentTripType === 'group') {
-                showScreen('groupDashboardScreen');
-            } else {
-                showScreen('soloDashboardScreen');
-            }
-        }
-        
-        // Select trip type
+
         function selectTripType(type) {
             currentTripType = type;
-            
-            if (type === 'group') {
-                document.getElementById('participantsSection').style.display = 'block';
-                document.getElementById('splitOptionsSection').style.display = 'block';
-                showScreen('groupDashboardScreen');
-            } else {
-                // For solo trips, check if budget is set
-                if (userData.budget && userData.budget > 0) {
-                    document.getElementById('participantsSection').style.display = 'none';
-                    document.getElementById('splitOptionsSection').style.display = 'none';
-                    participants = ['You'];
-                    showScreen('soloDashboardScreen');
-                } else {
-                    showScreen('soloBudgetSetupScreen');
-                }
+            showToast(`${type === 'group' ? 'Group' : 'Solo'} trip selected!`, 'success');
+            // Here you would navigate to the actual trip dashboard
+        }
+
+        function logout() {
+            if (isDemoMode) {
+                isDemoMode = false;
+                currentUser = null;
+                showToast('Demo mode ended.', 'info');
+            } else if (auth) {
+                auth.signOut();
             }
+            showScreen('authScreen');
         }
 
-        // Budget setup for solo trips
-        document.getElementById('budgetSetupForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const budget = parseFloat(document.getElementById('tripBudget').value);
-            const duration = parseInt(document.getElementById('tripDuration').value);
-            
-            userData.budget = budget;
-            userData.tripDuration = duration;
-            
-            updateUserData();
-            showScreen('soloDashboardScreen');
-        });
-
-        // Show budget setup modal
-        function showBudgetSetupModal() {
-            document.getElementById('updateBudget').value = userData.budget;
-            document.getElementById('updateDuration').value = userData.tripDuration;
-            const modal = new bootstrap.Modal(document.getElementById('budgetSetupModal'));
-            modal.show();
-        }
-
-        // Update budget
-        function updateBudget() {
-            const budget = parseFloat(document.getElementById('updateBudget').value);
-            const duration = parseInt(document.getElementById('updateDuration').value);
-            
-            userData.budget = budget;
-            userData.tripDuration = duration;
-            
-            updateUserData();
-            const modal = bootstrap.Modal.getInstance(document.getElementById('budgetSetupModal'));
-            modal.hide();
-        }
-
-        // Show toast notification
-        function showToast(message, type) {
+        // Toast Notification Function
+        function showToast(message, type = 'info') {
             const toastContainer = document.querySelector('.toast-container');
-            const toastId = 'toast-' + Date.now();
-            
             const toast = document.createElement('div');
-            toast.className = `toast align-items-center text-white bg-${type === 'success' ? 'success' : 'danger'} border-0`;
-            toast.setAttribute('role', 'alert');
-            toast.setAttribute('aria-live', 'assertive');
-            toast.setAttribute('aria-atomic', 'true');
-            toast.id = toastId;
-            
+            toast.className = `toast align-items-center text-white bg-${type === 'success' ? 'success' : type === 'error' ? 'danger' : 'info'} border-0`;
             toast.innerHTML = `
                 <div class="d-flex">
-                    <div class="toast-body">
-                        ${message}
-                    </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    <div class="toast-body">${message}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
                 </div>
             `;
-            
             toastContainer.appendChild(toast);
-            
-            const bsToast = new bootstrap.Toast(toast, { delay: 3000 });
+            const bsToast = new bootstrap.Toast(toast);
             bsToast.show();
-            
-            // Remove toast from DOM after it's hidden
-            toast.addEventListener('hidden.bs.toast', function() {
-                toast.remove();
-            });
+            setTimeout(() => toast.remove(), 3000);
         }
 
-        // Set today's date as default for expense date
+        // Initialize app
         document.addEventListener('DOMContentLoaded', function() {
-            const today = new Date().toISOString().split('T')[0];
-            if (document.getElementById('expenseDate')) {
-                document.getElementById('expenseDate').value = today;
+            // Check if we're already in demo mode (page refresh)
+            const savedData = localStorage.getItem('expenshare_demo_data');
+            if (savedData) {
+                enableDemoMode();
             }
         });
+    </script>
 
-        // Note: The remaining application functions (expense management, dashboard updates, etc.)
-        // would be similar to the previous implementation but integrated with Firebase.
+    <!-- Firebase Setup Guide -->
+    <script>
+        // This script helps users set up Firebase
+        function showFirebaseSetupGuide() {
+            const guide = `
+                <div class="setup-instructions">
+                    <h5><i class="fas fa-fire"></i> Firebase Setup Guide</h5>
+                    <ol>
+                        <li>Go to <a href="https://console.firebase.google.com" target="_blank">Firebase Console</a></li>
+                        <li>Click "Create a project" or select existing</li>
+                        <li>Enable Authentication:
+                            <ul>
+                                <li>Go to Authentication → Sign-in method</li>
+                                <li>Enable Google provider</li>
+                                <li>Add your domain to authorized domains</li>
+                            </ul>
+                        </li>
+                        <li>Enable Firestore:
+                            <ul>
+                                <li>Go to Firestore Database</li>
+                                <li>Create database in test mode</li>
+                            </ul>
+                        </li>
+                        <li>Get your config:
+                            <ul>
+                                <li>Go to Project Settings → General</li>
+                                <li>Copy the config object</li>
+                                <li>Replace the config in the code</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p><strong>Example config:</strong></p>
+                    <code>
+const firebaseConfig = {
+    apiKey: "your-api-key",
+    authDomain: "your-project.firebaseapp.com",
+    projectId: "your-project-id",
+    storageBucket: "your-project.appspot.com",
+    messagingSenderId: "123456789",
+    appId: "your-app-id"
+};
+                    </code>
+                </div>
+            `;
+            document.querySelector('.setup-instructions').innerHTML = guide;
+        }
+
+        // Show detailed setup guide on click
+        document.querySelector('.setup-instructions').addEventListener('click', showFirebaseSetupGuide);
     </script>
 </body>
 </html>
